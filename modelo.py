@@ -1,50 +1,38 @@
-#Filmes e séries tem as seguintes características:
+class Programa:
+    def __init__(self, nome, ano):
+        self._nome = nome.title()
+        self.ano = ano
+        self._curtidas = 0
 
-#Filme: Nome, ano, duração
-#Séries: Nome, ano, temporadas
+    @property
+    def curtidas(self):
+        return self._curtidas
 
-class Filmes:
+    @property
+    def nome(self):
+        return self._nome
+    
+    @property
+    def curtir(self):
+        self._curtidas += 1
+
+class Filmes(Programa):
     def __init__(self, nome, ano, duracao):
-        self.__nome = nome.title()
-        self.ano = ano
+        super().__init__(nome, ano)
         self.duracao = duracao
-        self.__curtir = 0
 
-    @property
-    def valor_curtir(self):
-        return self.__curtir
-    
-    @property
-    def nome(self):
-        return self.__nome
-
-    def curtida(self):
-        self.curtir += 1
-
-class Series:
+class Series(Programa):
     def __init__(self, nome, ano, temporadas):
-        self.__nome = nome.title()
-        self.ano = ano
+        super().__init__(nome, ano)
         self.temporadas = temporadas
-        self.__curtir = 0
-    
-    @property
-    def valor_curtir(self):
-        return self.__curtir
-    
-    @property
-    def nome(self):
-        return self.__nome
-    
-    def curtida(self):
-        self.curtir += 1
 
+# Criando os objetos
 avatar = Filmes("Avatar", 2009, 177)
-print(f"Filme: {avatar.nome} - Ano: {avatar.ano} - Duração: {avatar.duracao} - Curtidas: {avatar.curtida}")
+avatar.curtir() # Dá 1 curtida
 
-serie1 = Series("Hearbreak High", 2022, 3)
-serie1.curtida()
-print(f"Nome: {serie1.nome} - Ano: {serie1.ano} - temporadas: {serie1.temporadas} - Curtidas: {serie1.curtida}")
+serie1 = Series("Heartbreak High", 2022, 3)
+serie1.curtir() # Dá 1 curtida
 
-
-
+# Exibindo os resultados
+print(f"Filme: {avatar.nome} - Ano: {avatar.ano} - Duração: {avatar.duracao} min - Curtidas: {avatar.curtidas}")
+print(f"Série: {serie1.nome} - Ano: {serie1.ano} - Temporadas: {serie1.temporadas} - Curtidas: {serie1.curtidas}")
