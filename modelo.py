@@ -1,4 +1,6 @@
-class Programa:
+# Classe mãe/principal
+# Super Classe
+class Programas:
     def __init__(self, nome, ano):
         self._nome = nome.title()
         self.ano = ano
@@ -12,27 +14,32 @@ class Programa:
     def nome(self):
         return self._nome
     
-    @property
+    # Removido o @property, pois curtir é uma ação (método)
     def curtir(self):
         self._curtidas += 1
 
-class Filmes(Programa):
+class Filmes(Programas):
     def __init__(self, nome, ano, duracao):
+        # Chama o construtor da classe mãe para criar o nome e as curtidas
         super().__init__(nome, ano)
         self.duracao = duracao
 
-class Series(Programa):
+class Series(Programas):
     def __init__(self, nome, ano, temporadas):
+        # Chama o construtor da classe mãe para criar o nome e as curtidas
         super().__init__(nome, ano)
         self.temporadas = temporadas
 
 # Criando os objetos
-avatar = Filmes("Avatar", 2009, 177)
-avatar.curtir() # Dá 1 curtida
+avatar = Filmes("avatar o caminho da água", 2022, 192)
+avatar.curtir()  # Agora funciona corretamente
 
-serie1 = Series("Heartbreak High", 2022, 3)
-serie1.curtir() # Dá 1 curtida
+serie1 = Series("heartbreak high", 2022, 3)
+serie1.curtir()  # Agora funciona corretamente
 
-# Exibindo os resultados
-print(f"Filme: {avatar.nome} - Ano: {avatar.ano} - Duração: {avatar.duracao} min - Curtidas: {avatar.curtidas}")
-print(f"Série: {serie1.nome} - Ano: {serie1.ano} - Temporadas: {serie1.temporadas} - Curtidas: {serie1.curtidas}")
+filmes_series = [avatar, serie1]
+
+for programas in filmes_series:
+    detalhe = programas.duracao if hasattr(programas, 'duracao') else programas.temporadas
+    
+    print(f"Nome: {programas.nome} - Ano: {programas.ano} - {detalhe} - Curtidas: {programas.curtidas}")
